@@ -1,7 +1,7 @@
 const express =require('express');
 const router = express.Router();
 const {protect}=require('../middlewear/authMiddlewear');
-const {getTasks,createTask,updateTask,deleteTask,updateTaskStatus,restoreTask}=require('../controllers/taskController');
+const {getTasks,createTask,updateTask,deleteTask,updateTaskStatus,restoreTask, assignTask}=require('../controllers/taskController');
 
 router.get('/',protect,getTasks)
     .post('/',protect,createTask);
@@ -15,5 +15,7 @@ router.route('/:id/status')
 
 router.route('/:id/restore')
 .patch(protect,restoreTask);
+
+router.patch("/:id/assign",protect,assignTask);
 
 module.exports=router;

@@ -21,7 +21,11 @@ const  taskSchema = new mongoose.Schema({
      isDeleted:{
       type:Boolean,
       default:false,
-     }
+     },
+     assignedTo:{
+     type:mongoose.Schema.Types.ObjectId,
+     ref:"User",
+     },
 },{timestamps:true});
 
 module.exports = mongoose.model('Task',taskSchema);
