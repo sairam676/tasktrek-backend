@@ -1,100 +1,100 @@
-# TaskTrek
-## TaskTrek – Task Management Backend API
+# TaskTrek – Backend System
 
-### 🛠 Tools & Technologies
-**Node.js**, **Express.js**, **MongoDB Atlas**, **Mongoose**, **JWT**, **Render**
-
----
-
-### 📘 Overview
-TaskTrek is a backend REST API for a task management system.  
-The project focuses on secure authentication, clean backend architecture, and real-world API design patterns.
-
-It provides authenticated APIs for managing user-specific tasks and is deployed in a production environment.
+A production-style backend system for task management built to deeply understand
+authentication, authorization, real-time systems, and backend architecture.
 
 ---
 
-### ⚙️ Features
-- JWT-based authentication for user registration and login  
-- Authenticated user profile endpoint (`GET /api/users/me`)  
-- User-level authorization (users can only access their own tasks)  
-- Task CRUD operations with status workflow (`todo`, `in-progress`, `done`)  
-- Query-based filtering of tasks by status  
-- Pagination support for scalable task retrieval  
-- Soft delete and restore functionality  
-- Centralized error handling middleware  
-- Production deployment on Render  
+## 🚀 Tech Stack
+
+- **Node.js**
+- **Express.js**
+- **MongoDB Atlas (Mongoose)**
+- **JWT Authentication**
+- **Socket.io (Real-time)**
+- **Render (Deployment)**
 
 ---
 
-### 🔐 Authentication
-Authentication is handled using JSON Web Tokens (JWT).
+## 📌 Features
+
+### 🔐 Authentication & Authorization
+- Secure JWT-based authentication for HTTP APIs.
+- JWT-authenticated Socket.io connections.
+- Strict ownership validation on all protected resources.
+
+### 🗂️ Task Management
+- Full CRUD APIs for tasks.
+- Task status workflow (`todo`, `in-progress`, `done`).
+- Pagination, filtering, and sorting.
+- Soft delete and restore using a lifecycle-based data model.
+
+### 👥 Task Assignment
+- Tasks can be assigned to other users.
+- Ownership enforced (only task owners can assign).
+- Assignment triggers real-time updates and notifications.
+
+### ⚡ Real-Time System (Socket.io)
+- Real-time task events:
+  - `task:created`
+  - `task:updated`
+  - `task:deleted`
+  - `task:assigned`
+- Room-based event scoping:
+  - `user:<userId>` for personal events
+  - `task:<taskId>` for shared task updates
+
+### 🟢 Presence System
+- Online/offline presence tracking.
+- Multi-tab safe presence handling.
+- Presence state managed server-side using socket lifecycle.
+
+### 🔔 Notifications
+- Persisted notifications stored in MongoDB.
+- Real-time notification delivery when users are online.
+- Notifications remain available when users reconnect.
+- Mark notifications as read / unread.
+
+### 🧱 Architecture
+- **Controller–Service separation**
+  - Controllers handle HTTP only.
+  - Services encapsulate business logic, socket events, and notifications.
+- Clean separation of concerns for maintainability and scalability.
 
 ---
 
-### 📡 API Endpoints
+## 🧠 Learning Goals Achieved
 
-#### Authentication
-- `POST /api/users/register` – Register a new user  
-- `POST /api/users/login` – Login and receive JWT  
-- `GET /api/users/me` – Get current authenticated user  
-
-#### Tasks (Protected Routes)
-- `GET /api/tasks` – Get all tasks for the logged-in user  
-- `GET /api/tasks?status=todo` – Filter tasks by status  
-- `GET /api/tasks?page=1&limit=10` – Paginated task results  
-- `POST /api/tasks` – Create a new task  
-- `PUT /api/tasks/:id` – Update a task  
-- `DELETE /api/tasks/:id` – Soft delete a task  
-- `PATCH /api/tasks/:id/restore` – Restore a deleted task  
+- Built a real-time backend system beyond basic CRUD.
+- Designed event-driven communication using Socket.io rooms.
+- Implemented persisted notifications alongside real-time delivery.
+- Applied clean backend architecture patterns used in production systems.
+- Gained hands-on understanding of presence, sockets, and authorization.
 
 ---
 
-### 🚀 Deployment
-The backend is deployed on **Render** and connected to **MongoDB Atlas**.
+## 🌍 Deployment
 
-Live API:
+- Deployed on **Render** with environment-based configuration.
+- MongoDB Atlas used for production-grade database hosting.
+
 ---
 
-### 📡 API Endpoints
+## 🧪 API Highlights
 
-#### Authentication
-- `POST /api/users/register` – Register a new user  
-- `POST /api/users/login` – Login and receive JWT  
-- `GET /api/users/me` – Get current authenticated user  
+- `POST /api/users` – Register
+- `POST /api/users/login` – Login
+- `GET /api/tasks` – List tasks (pagination & filters)
+- `POST /api/tasks` – Create task
+- `PUT /api/tasks/:id` – Update task
+- `PATCH /api/tasks/:id/assign` – Assign task
+- `PATCH /api/tasks/:id/status` – Update status
+- `DELETE /api/tasks/:id` – Soft delete
+- `PATCH /api/tasks/:id/restore` – Restore task
+- `GET /api/notifications` – Fetch notifications
 
-#### Tasks (Protected Routes)
-- `GET /api/tasks` – Get all tasks for the logged-in user  
-- `GET /api/tasks?status=todo` – Filter tasks by status  
-- `GET /api/tasks?page=1&limit=10` – Paginated task results  
-- `POST /api/tasks` – Create a new task  
-- `PUT /api/tasks/:id` – Update a task  
-- `DELETE /api/tasks/:id` – Soft delete a task  
-- `PATCH /api/tasks/:id/restore` – Restore a deleted task  
----
-### Backend Design Highlights
-- Secure JWT authentication and authorization
-- Ownership validation for all protected resources
-- Soft delete pattern using `isDeleted` flag
-- Query-driven filtering and pagination
-- Environment-aware configuration for production
 ---
 
-### 📦 Setup (Local Development)
-
-```bash
-# 1. Clone the repository
-git clone https://github.com/sairam676/tasktrek-backend.git
-cd tasktrek-backend
-
-# 2. Install dependencies
-npm install
-
-# 3. Configure environment variables
-# Create a .env file with:
-# MONGO_URI, JWT_SECRET, NODE_ENV
-
-# 4. Run the development server
-npm run dev
----
+## 📄 License
+MIT
 
